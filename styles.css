@@ -1,3 +1,11 @@
+.hidden { display: none !important; }
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -106,7 +114,7 @@ body {
 fieldset {
   border: 1px solid #ddd;
   padding: 20px;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
   border-radius: 8px;
 }
 
@@ -115,13 +123,14 @@ select {
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;
+  font-size: 16px; /* prevents iOS zoom */
 }
 
 .player-card {
   border: 1px solid #ddd;
-  padding: 20px;
-  margin-bottom: 20px;
-  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 14px;
+  border-radius: 10px;
   background: #fafafa;
 }
 
@@ -136,120 +145,119 @@ select {
   cursor: pointer;
 }
 
-/* =========================
-   MOBILE – SINGLE CARD VIEW
-   ========================= */
+/* Change package button */
+.change-package-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #145a3a;
+  background: white;
+  color: #145a3a;
+  font-weight: 700;
+  cursor: pointer;
+  margin: -10px 0 16px;
+}
 
-@media (max-width: 768px) {
+.change-package-btn:hover {
+  background: #f1f7f4;
+}
 
-  /* Reduce excessive vertical space */
+/* Package summary */
+.package-summary {
+  background: #f1f7f4;
+  border: 1px solid #cfe6dc;
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin: 0 0 20px;
+  text-align: left;
+}
+
+.package-summary h4 {
+  margin: 0 0 8px;
+  color: #0f3d2e;
+}
+
+.package-summary ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.package-summary li {
+  margin: 6px 0;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+/* Accordion */
+.player-accordion {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: #fafafa;
+  margin-bottom: 14px;
+  overflow: hidden;
+}
+
+.player-accordion summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  font-weight: 700;
+  background: #ffffff;
+  border-bottom: 1px solid #e6e6e6;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.player-accordion summary::-webkit-details-marker {
+  display: none;
+}
+
+.player-accordion summary::after {
+  content: "＋";
+  font-size: 18px;
+  line-height: 1;
+}
+
+.player-accordion[open] summary::after {
+  content: "−";
+}
+
+.player-accordion .player-inner {
+  padding: 16px;
+}
+
+/* MOBILE: 1 tile per row + full-screen modal */
+@media screen and (max-width: 768px), screen and (max-device-width: 768px) {
   .packages {
     padding: 24px 16px 32px;
   }
 
-  /* Force one card per row */
   .package-grid {
+    display: grid;
     grid-template-columns: 1fr;
     gap: 16px;
-    margin-top: 24px;
+    max-width: none;
+    width: 100%;
+    margin: 24px 0 0;
   }
 
-  /* Mobile-friendly cards */
-  .package-card {
-    padding: 20px 18px;
-    border-radius: 12px;
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
-  }
-
-  .package-card h3 {
-    font-size: 17px;
-    margin-bottom: 6px;
-  }
-
-  .package-card p {
-    font-size: 14px;
-    line-height: 1.4;
-    margin-bottom: 10px;
-  }
-
-  .package-card .price {
-    font-size: 15px;
-    margin-bottom: 12px;
-  }
-
-  /* Big, obvious tap target */
   .package-card button {
     width: 100%;
     padding: 14px;
-    font-size: 15px;
-    border-radius: 8px;
+  }
+
+  .modal {
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    border-radius: 0;
+    padding: 20px 16px;
+  }
+
+  .close-modal {
+    font-size: 32px;
+    top: 12px;
+    right: 12px;
   }
 }
-
-/* Small phones */
-@media (max-width: 420px) {
-  .package-card {
-    padding: 18px 16px;
-  }
-
-  .package-card h3 {
-    font-size: 16px;
-  }
-}
-
-@media (max-width: 768px) {
-  .package-grid {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    gap: 16px !important;
-    width: 100% !important;
-  }
-
-  .package-card {
-    width: 100% !important;
-  }
-}
-
-/* ====== HARD MOBILE OVERRIDE (works even if viewport is weird) ====== */
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-/* Mobile rules should apply if either viewport width OR device width is small */
-@media (max-width: 768px), (max-device-width: 768px) {
-
-  .packages {
-    padding: 24px 16px 32px !important;
-  }
-
-  .package-grid {
-    display: grid !important;
-    grid-template-columns: 1fr !important;   /* 1 card per row */
-    gap: 16px !important;
-    max-width: 100% !important;             /* remove the desktop max-width */
-    width: 100% !important;
-    margin: 24px 0 0 !important;            /* stop centering/boxing */
-    padding: 0 !important;
-  }
-
-  .package-card {
-    width: 100% !important;
-    padding: 20px 18px !important;
-    border-radius: 12px !important;
-  }
-
-  .package-card button {
-    width: 100% !important;
-    padding: 14px !important;
-  }
-}
-@media (max-width: 768px), (max-device-width: 768px) {
-  body { outline: 8px solid hotpink !important; }
-}
-
-/* =========================
-   END MOBILE STYLES
-   ========================= */ 

@@ -25,47 +25,56 @@
     <h2>Select Your Sponsorship Package</h2>
 
     <div class="package-grid">
+
       <div class="package-card" data-package="main">
         <h3>Main Sponsor</h3>
         <p>4 Four-Balls · Gala Dinner Table for 8</p>
         <span class="price">R600 000</span>
-        <button>Select Package</button>
+        <button type="button">Select Package</button>
       </div>
 
       <div class="package-card" data-package="platinum">
         <h3>Platinum Sponsor</h3>
         <p>3 Four-Balls · Gala Dinner Table for 8</p>
         <span class="price">R450 000</span>
-        <button>Select Package</button>
+        <button type="button">Select Package</button>
       </div>
 
       <div class="package-card" data-package="gold">
         <h3>Gold Sponsor</h3>
         <p>2 Four-Balls · Gala Dinner Table for 8</p>
         <span class="price">R350 000</span>
-        <button>Select Package</button>
+        <button type="button">Select Package</button>
       </div>
 
       <div class="package-card" data-package="silver">
         <h3>Silver Sponsor</h3>
         <p>2 Four-Balls</p>
         <span class="price">R250 000</span>
-        <button>Select Package</button>
+        <button type="button">Select Package</button>
       </div>
 
       <div class="package-card" data-package="goodie">
         <h3>Goodie Bag Sponsor</h3>
         <p>1 Four-Ball · Gala Dinner Table for 4</p>
         <span class="price">R150 000</span>
-        <button>Select Package</button>
+        <button type="button">Select Package</button>
       </div>
 
       <div class="package-card" data-package="fourball">
         <h3>Four-Ball Only</h3>
         <p>1 Four-Ball · Dinner Table for 4</p>
         <span class="price">R10 000</span>
-        <button>Select Package</button>
+        <button type="button">Select Package</button>
       </div>
+
+      <div class="package-card" data-package="watering">
+        <h3>Watering Hole Sponsor</h3>
+        <p>Brand activation opportunity with gala dinner seating for 2</p>
+        <span class="price">R30 000</span>
+        <button type="button">Select Package</button>
+      </div>
+
     </div>
   </section>
 
@@ -98,8 +107,56 @@
             <option value="silver">Silver Sponsor</option>
             <option value="goodie">Goodie Bag Sponsor</option>
             <option value="fourball">Four-Ball Only</option>
-            <option value="watering">Watering Hole</option>
+            <option value="watering">Watering Hole Sponsor</option>
           </select>
+        </fieldset>
+
+        <button type="button" id="changePackageBtn" class="change-package-btn">
+          Change package
+        </button>
+
+        <div id="packageSummary" class="package-summary hidden"></div>
+
+        <!-- Company details (only Watering Hole) -->
+        <fieldset id="companyFieldset" class="hidden">
+          <legend>Company Details</legend>
+          <input type="text" id="companyName" placeholder="Company Name" />
+          <input type="text" id="vatNumber" placeholder="VAT Number" />
+        </fieldset>
+
+        <!-- Watering Hole dietary requirements (2 guests) -->
+        <fieldset id="wateringDietFieldset" class="hidden">
+          <legend>Dinner Guest Dietary Requirements (2 Guests)</legend>
+
+          <div class="player-card">
+            <h3>Guest 1</h3>
+            <select id="wateringDiet1">
+              <option value="">Dietary Requirement</option>
+              <option>None</option>
+              <option>Halaal</option>
+              <option>Kosher</option>
+              <option>Vegetarian</option>
+              <option>Vegan</option>
+              <option>Gluten-Free</option>
+              <option>Other</option>
+            </select>
+            <input type="text" id="wateringDietNotes1" placeholder="Dietary notes (optional)" />
+          </div>
+
+          <div class="player-card">
+            <h3>Guest 2</h3>
+            <select id="wateringDiet2">
+              <option value="">Dietary Requirement</option>
+              <option>None</option>
+              <option>Halaal</option>
+              <option>Kosher</option>
+              <option>Vegetarian</option>
+              <option>Vegan</option>
+              <option>Gluten-Free</option>
+              <option>Other</option>
+            </select>
+            <input type="text" id="wateringDietNotes2" placeholder="Dietary notes (optional)" />
+          </div>
         </fieldset>
 
         <div id="playersContainer"></div>
