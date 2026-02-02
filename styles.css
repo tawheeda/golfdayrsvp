@@ -196,6 +196,60 @@ select {
     font-size: 16px;
   }
 }
+
+@media (max-width: 768px) {
+  .package-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+    width: 100% !important;
+  }
+
+  .package-card {
+    width: 100% !important;
+  }
+}
+
+/* ====== HARD MOBILE OVERRIDE (works even if viewport is weird) ====== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Mobile rules should apply if either viewport width OR device width is small */
+@media (max-width: 768px), (max-device-width: 768px) {
+
+  .packages {
+    padding: 24px 16px 32px !important;
+  }
+
+  .package-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;   /* 1 card per row */
+    gap: 16px !important;
+    max-width: 100% !important;             /* remove the desktop max-width */
+    width: 100% !important;
+    margin: 24px 0 0 !important;            /* stop centering/boxing */
+    padding: 0 !important;
+  }
+
+  .package-card {
+    width: 100% !important;
+    padding: 20px 18px !important;
+    border-radius: 12px !important;
+  }
+
+  .package-card button {
+    width: 100% !important;
+    padding: 14px !important;
+  }
+}
+@media (max-width: 768px), (max-device-width: 768px) {
+  body { outline: 8px solid hotpink !important; }
+}
+
 /* =========================
    END MOBILE STYLES
    ========================= */ 
