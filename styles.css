@@ -137,30 +137,28 @@ select {
 }
 
 /* =========================
-   MOBILE PACKAGE FIX
+   MOBILE – SINGLE CARD VIEW
    ========================= */
 
 @media (max-width: 768px) {
 
-  /* Tighten page spacing */
+  /* Reduce excessive vertical space */
   .packages {
-    padding: 24px 16px;
+    padding: 24px 16px 32px;
   }
 
-  /* Force true mobile layout */
+  /* Force one card per row */
   .package-grid {
-    display: grid;
-    grid-template-columns: 1fr; /* ONE card per row */
+    grid-template-columns: 1fr;
     gap: 16px;
     margin-top: 24px;
   }
 
-  /* Make cards feel like mobile tiles */
+  /* Mobile-friendly cards */
   .package-card {
-    width: 100%;
     padding: 20px 18px;
     border-radius: 12px;
-    box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
   }
 
   .package-card h3 {
@@ -179,7 +177,7 @@ select {
     margin-bottom: 12px;
   }
 
-  /* Make button feel tappable */
+  /* Big, obvious tap target */
   .package-card button {
     width: 100%;
     padding: 14px;
@@ -188,7 +186,7 @@ select {
   }
 }
 
-/* Extra-small phones */
+/* Small phones */
 @media (max-width: 420px) {
   .package-card {
     padding: 18px 16px;
@@ -198,3 +196,6 @@ select {
     font-size: 16px;
   }
 }
+/* =========================
+   END MOBILE STYLES
+   ========================= */ 
