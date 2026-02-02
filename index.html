@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Celebrity Golf Day RSVP</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Welcome to the Celebrity Golf Day</h1>
+    <p>
+      Thank you for showing interest in our Celebrity Golf Day hosted by the
+      Durban Bush Bucks Foundation. This initiative honours football heritage
+      while raising support for youth development and community upliftment
+      programmes across KwaZulu-Natal.
+    </p>
+  </section>
+
+  <!-- PACKAGES -->
+  <section class="packages">
+    <h2>Select Your Sponsorship Package</h2>
+
+    <div class="package-grid">
+      <div class="package-card" data-package="main">
+        <h3>Main Sponsor</h3>
+        <p>4 Four-Balls · Gala Dinner Table for 8</p>
+        <span class="price">R600 000</span>
+        <button>Select Package</button>
+      </div>
+
+      <div class="package-card" data-package="platinum">
+        <h3>Platinum Sponsor</h3>
+        <p>3 Four-Balls · Gala Dinner Table for 8</p>
+        <span class="price">R450 000</span>
+        <button>Select Package</button>
+      </div>
+
+      <div class="package-card" data-package="gold">
+        <h3>Gold Sponsor</h3>
+        <p>2 Four-Balls · Gala Dinner Table for 8</p>
+        <span class="price">R350 000</span>
+        <button>Select Package</button>
+      </div>
+
+      <div class="package-card" data-package="silver">
+        <h3>Silver Sponsor</h3>
+        <p>2 Four-Balls</p>
+        <span class="price">R250 000</span>
+        <button>Select Package</button>
+      </div>
+
+      <div class="package-card" data-package="goodie">
+        <h3>Goodie Bag Sponsor</h3>
+        <p>1 Four-Ball · Gala Dinner Table for 4</p>
+        <span class="price">R150 000</span>
+        <button>Select Package</button>
+      </div>
+
+      <div class="package-card" data-package="fourball">
+        <h3>Four-Ball Only</h3>
+        <p>1 Four-Ball · Dinner Table for 4</p>
+        <span class="price">R10 000</span>
+        <button>Select Package</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- RSVP MODAL -->
+  <div class="modal-overlay" id="rsvpModal">
+    <div class="modal">
+      <button class="close-modal" id="closeModal">&times;</button>
+
+      <h2>RSVP Details</h2>
+      <p class="modal-intro">
+        Please complete the form below to confirm your participation.
+      </p>
+
+      <form id="rsvpForm">
+
+        <fieldset>
+          <legend>Main Contact</legend>
+          <input type="text" placeholder="Full Name" required />
+          <input type="email" placeholder="Email Address" required />
+          <input type="tel" placeholder="Phone Number" required />
+        </fieldset>
+
+        <fieldset>
+          <legend>Sponsorship Package</legend>
+          <select id="packageSelect" disabled required>
+            <option value="">-- Select --</option>
+            <option value="main">Main Sponsor</option>
+            <option value="platinum">Platinum Sponsor</option>
+            <option value="gold">Gold Sponsor</option>
+            <option value="silver">Silver Sponsor</option>
+            <option value="goodie">Goodie Bag Sponsor</option>
+            <option value="fourball">Four-Ball Only</option>
+            <option value="watering">Watering Hole</option>
+          </select>
+        </fieldset>
+
+        <div id="playersContainer"></div>
+
+        <button type="submit" class="submit-btn">Submit RSVP</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
