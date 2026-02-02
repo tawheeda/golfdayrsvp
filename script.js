@@ -1,3 +1,6 @@
+// ======================
+// GOLF DAY RSVP (existing)
+// ======================
 const modal = document.getElementById("rsvpModal");
 const closeModalBtn = document.getElementById("closeModal");
 const packageSelect = document.getElementById("packageSelect");
@@ -35,7 +38,6 @@ const packageDetails = {
   silver: { title: "Silver Sponsor", bullets: ["2 Four-Balls"] },
   goodie: { title: "Goodie Bag Sponsor", bullets: ["1 Four-Ball", "Gala Dinner Table for 4"] },
   fourball: { title: "Four-Ball Only", bullets: ["1 Four-Ball", "Dinner Table for 4"] },
-
   watering: {
     title: "Watering Hole Sponsor",
     bullets: [
@@ -49,11 +51,14 @@ const packageDetails = {
   }
 };
 
-// Open modal + auto-select package
+// Open golf modal + auto-select package
 document.querySelectorAll(".package-card button").forEach(button => {
   button.addEventListener("click", (e) => {
     const card = e.target.closest(".package-card");
     const selectedPackage = card.dataset.package;
+
+    // If this is a gala tile, ignore here (handled below)
+    if (card.dataset.gala === "true") return;
 
     modal.classList.add("active");
     packageSelect.value = selectedPackage;
@@ -61,8 +66,8 @@ document.querySelectorAll(".package-card button").forEach(button => {
   });
 });
 
-// Close modal (shared reset)
-function closeModal() {
+// Close golf modal (shared reset)
+function closeGolfModal() {
   modal.classList.remove("active");
   playersContainer.innerHTML = "";
   packageSelect.value = "";
@@ -88,22 +93,22 @@ function closeModal() {
   packageSummary.innerHTML = "";
 }
 
-closeModalBtn.addEventListener("click", closeModal);
+closeModalBtn.addEventListener("click", closeGolfModal);
 
-// Close on overlay click
+// Close golf modal on overlay click
 modal.addEventListener("click", (e) => {
-  if (e.target === modal) closeModal();
+  if (e.target === modal) closeGolfModal();
 });
 
 // Change package button: close modal & scroll to packages
 changePackageBtn.addEventListener("click", () => {
-  closeModal();
+  closeGolfModal();
   document.querySelector(".packages").scrollIntoView({ behavior: "smooth" });
 });
 
-// Helper: set up accordion behavior for mobile (only one open)
-function setupMobileAccordion() {
-  const detailsList = playersContainer.querySelectorAll("details.player-accordion");
+// Helper: set up accordion behavior for mobile (only one open at a time)
+function setupMobileAccordion(containerEl = playersContainer) {
+  const detailsList = containerEl.querySelectorAll("details.player-accordion");
 
   detailsList.forEach((details) => {
     details.addEventListener("toggle", () => {
@@ -118,7 +123,7 @@ function setupMobileAccordion() {
   });
 }
 
-// Package change logic
+// Golf package change logic
 packageSelect.addEventListener("change", () => {
   playersContainer.innerHTML = "";
   const selected = packageSelect.value;
@@ -153,7 +158,7 @@ packageSelect.addEventListener("change", () => {
   wateringDietNotes1.value = "";
   wateringDietNotes2.value = "";
 
-  // ✅ Watering Hole: show company + dietary (2 guests), no players
+  // Watering Hole: company + dietary for 2 guests, no players
   if (selected === "watering") {
     companyFieldset.classList.remove("hidden");
     companyName.required = true;
@@ -221,5 +226,107 @@ packageSelect.addEventListener("change", () => {
     `;
   }
 
-  setupMobileAccordion();
+  setupMobileAccordion(playersContainer);
 });
+
+
+// ======================
+// GALA DINNER TABLE RSVP
+// ======================
+
+// Modal elements
+const galaModal = document.getElementById("galaModal");
+const openGalaBtn = document.getElementById("openGalaBtn");
+const closeGalaModalBtn = document.getElementById("closeGalaModal");
+
+const tableType = document.getElementById("tableType");
+const tableQty = document.getElementById("tableQty");
+const galaGuests = document.getElementById("galaGuests");
+
+// Limits (Silver: 7 total, 1 sold = 6 left)
+const galaTableLimits = {
+  platinum: 3,
+  gold: 5,
+  silver: 6
+};
+
+// Open Gala modal
+if (openGalaBtn) {
+  openGalaBtn.addEventListener("click", () => {
+    galaModal.classList.add("active");
+  });
+}
+
+// Close Gala modal (reset)
+function closeGalaModal() {
+  galaModal.classList.remove("active");
+  galaGuests.innerHTML = "";
+  if (tableType) tableType.value = "";
+  if (tableQty) tableQty.innerHTML = `<option value="">Number of Tables</option>`;
+}
+
+if (closeGalaModalBtn) {
+  closeGalaModalBtn.addEventListener("click", closeGalaModal);
+}
+
+// Close Gala modal on overlay click
+if (galaModal) {
+  galaModal.addEventListener("click", (e) => {
+    if (e.target === galaModal) closeGalaModal();
+  });
+}
+
+// When table type changes, rebuild quantity options based on limits
+if (tableType) {
+  tableType.addEventListener("change", () => {
+    galaGuests.innerHTML = "";
+    tableQty.innerHTML = `<option value="">Number of Tables</option>`;
+
+    const selectedType = tableType.value;
+    if (!selectedType) return;
+
+    const maxTables = galaTableLimits[selectedType] || 0;
+
+    for (let i = 1; i <= maxTables; i++) {
+      tableQty.innerHTML += `<option value="${i}">${i} Table${i > 1 ? "s" : ""}</option>`;
+    }
+  });
+}
+
+// When quantity changes, generate 10 guests per table
+if (tableQty) {
+  tableQty.addEventListener("change", () => {
+    galaGuests.innerHTML = "";
+
+    const qty = parseInt(tableQty.value || 0);
+    if (!qty) return;
+
+    const totalGuests = qty * 10;
+
+    for (let i = 1; i <= totalGuests; i++) {
+      galaGuests.innerHTML += `
+        <details class="player-accordion" ${i === 1 ? "open" : ""}>
+          <summary>Guest ${i}</summary>
+          <div class="player-inner">
+            <input type="text" placeholder="Guest Name" required />
+
+            <select required>
+              <option value="">Dietary Requirement</option>
+              <option>None</option>
+              <option>Halaal</option>
+              <option>Kosher</option>
+              <option>Vegetarian</option>
+              <option>Vegan</option>
+              <option>Gluten-Free</option>
+              <option>Other</option>
+            </select>
+
+            <input type="text" placeholder="Dietary notes (optional)" />
+          </div>
+        </details>
+      `;
+    }
+
+    setupMobileAccordion(galaGuests);
+  });
+}
