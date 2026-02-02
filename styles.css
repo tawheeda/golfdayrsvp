@@ -137,121 +137,64 @@ select {
 }
 
 /* =========================
-   MOBILE OPTIMISATION
+   MOBILE PACKAGE FIX
    ========================= */
 
 @media (max-width: 768px) {
 
-  /* HERO */
-  .hero {
-    padding: 40px 16px;
-  }
-
-  .hero h1 {
-    font-size: 24px;
-  }
-
-  .hero p {
-    font-size: 15px;
-  }
-
-  /* PACKAGES */
+  /* Tighten page spacing */
   .packages {
-    padding: 30px 16px;
+    padding: 24px 16px;
   }
 
+  /* Force true mobile layout */
   .package-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* ONE card per row */
     gap: 16px;
-    margin-top: 25px;
+    margin-top: 24px;
   }
 
+  /* Make cards feel like mobile tiles */
   .package-card {
-    padding: 20px;
+    width: 100%;
+    padding: 20px 18px;
+    border-radius: 12px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.08);
   }
 
   .package-card h3 {
-    font-size: 18px;
+    font-size: 17px;
+    margin-bottom: 6px;
   }
 
   .package-card p {
     font-size: 14px;
-  }
-
-  .package-card button {
-    width: 100%;
-    padding: 12px;
-    font-size: 15px;
-  }
-
-  /* MODAL */
-  .modal {
-    width: 100%;
-    height: 100%;
-    max-height: none;
-    border-radius: 0;
-    padding: 20px 16px;
-  }
-
-  .close-modal {
-    top: 12px;
-    right: 12px;
-    font-size: 32px;
-  }
-
-  .modal h2 {
-    font-size: 20px;
-  }
-
-  .modal-intro {
-    font-size: 14px;
-  }
-
-  /* FORM */
-  fieldset {
-    padding: 16px;
-  }
-
-  legend {
-    font-size: 15px;
-  }
-
-  input,
-  select {
-    font-size: 16px; /* prevents iOS zoom */
-    padding: 12px;
-  }
-
-  /* PLAYER CARDS */
-  .player-card {
-    padding: 16px;
-    margin-bottom: 16px;
-    border-radius: 10px;
-  }
-
-  .player-card h3 {
-    font-size: 16px;
+    line-height: 1.4;
     margin-bottom: 10px;
   }
 
-  /* SUBMIT BUTTON */
-  .submit-btn {
-    font-size: 16px;
-    padding: 16px;
+  .package-card .price {
+    font-size: 15px;
+    margin-bottom: 12px;
+  }
+
+  /* Make button feel tappable */
+  .package-card button {
+    width: 100%;
+    padding: 14px;
+    font-size: 15px;
+    border-radius: 8px;
   }
 }
 
-/* EXTRA SMALL DEVICES */
+/* Extra-small phones */
 @media (max-width: 420px) {
-
-  .hero h1 {
-    font-size: 22px;
-  }
-
   .package-card {
-    padding: 18px;
+    padding: 18px 16px;
   }
 
-  .modal {
-    padding: 16px 14px;
+  .package-card h3 {
+    font-size: 16px;
   }
 }
